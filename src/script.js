@@ -1,1 +1,3 @@
-console.log("personal portfolio");
+import App from "./app/App.js";
+
+const app = new App();
