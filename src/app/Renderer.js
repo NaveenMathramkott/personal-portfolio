@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import App from "./App";
+import { sizeStore } from "./utils/store";
 
 export default class Renderer {
   constructor() {
@@ -8,7 +9,10 @@ export default class Renderer {
     this.canvas = this.app.canvas;
     this.scene = this.app.scene;
     this.camera = this.app.camera;
+    this.sizeStore = sizeStore;
+    this.sizes = this.sizeStore.getState();
     this.setInstance();
+    this.setResizerListener();
   }
   setInstance() {
     // initialising renderer
@@ -16,9 +20,17 @@ export default class Renderer {
       canvas: this.canvas,
       antialias: true,
     });
-    this.instance.setSize(window.innerWidth, window.innerHeight);
+    this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   }
+
+  setResizerListener() {
+    this.sizeStore.subscribe((sizes) => {
+      this.instance.setSize(sizes.width, sizes.height);
+      this.instance.setPixelRatio(sizes.pixelRatio);
+    });
+  }
+
   //loop method for animationFrame
   loop() {
     this.instance.render(this.scene, this.camera.instance);
