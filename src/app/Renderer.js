@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import App from "./App";
-import { sizeStore } from "./utils/store";
+import { sizeStore } from "./utils/Store";
 
 export default class Renderer {
   constructor() {
