@@ -1,5 +1,5 @@
-import App from "../App";
 import * as THREE from "three";
+import App from "../App.js";
 
 export default class Loop {
   constructor() {
@@ -18,10 +18,10 @@ export default class Loop {
     const elapsedTime = this.clock.getElapsedTime();
     const deltaTime = elapsedTime - this.previousElapsedTime;
     this.previousElapsedTime = elapsedTime;
-
     this.world.loop(deltaTime, elapsedTime);
     this.camera.loop(deltaTime);
     this.renderer.loop();
+
     // using callback function instead of normal function
     window.requestAnimationFrame(() => this.loop());
   }

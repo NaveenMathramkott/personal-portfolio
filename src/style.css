@@ -1,12 +1,47 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Amatic+SC");
 
+:root {
+  --font: "Permanent Marker", cursive;
+  --font-secondary: "Poppins", sans-serif;
+  --white: #ffffff;
+  --loader: #2d7081;
+}
+
 body {
   margin: 0;
   overflow: hidden;
-  font-family: "Amatic SC", cursive;
+  font-family: var(--font);
+}
+.permanent-marker-regular {
+  font-family: var(--font);
+  font-weight: 200;
+  font-style: normal;
 }
 
+h1::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--loading-width, 0%);
+  height: 100%;
+  color: var(--loader);
+  overflow: hidden;
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--white);
+  background-color: transparent;
+  font-family: var(--font);
+  font-size: 2rem;
+  opacity: 1;
+  transition: opacity 1s;
+}
 .overlay {
   opacity: 1;
   background-color: rgb(0, 0, 0);
@@ -23,19 +58,6 @@ body {
   opacity: 0;
 }
 
-.loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  background-color: transparent;
-  font-family: "Amatic SC";
-  font-size: 2rem;
-  opacity: 1;
-  transition: opacity 1s;
-}
-
 .loading.fade {
   opacity: 0;
 }
@@ -46,10 +68,10 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   border: none;
-  color: white;
+  color: var(--white);
   background-color: transparent;
   font-size: 4rem;
-  font-family: "Amatic SC";
+  font-family: var(--font);
   opacity: 0;
   transition: opacity 0.5s;
   display: none;
@@ -65,7 +87,7 @@ body {
 
 @media (hover: hover) and (pointer: fine) {
   .start:hover {
-    color: #9effe7;
+    color: var(--loader);
   }
 }
 
@@ -107,9 +129,9 @@ body {
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-secondary);
   margin: 0 auto;
-  color: white;
+  color: var(--white);
   /* Set text color to white within the modal */
 }
 
@@ -122,14 +144,14 @@ body {
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  color: #fff;
+  color: var(--white);
   /* Set the color of the button text to white */
   font-size: 20px;
   font-weight: bold;
   transition: 0.6s all;
   cursor: pointer;
   text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-secondary);
   margin-top: 20px;
 }
 

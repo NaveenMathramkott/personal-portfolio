@@ -48,25 +48,33 @@ export default class Physics {
         rigidBodyType = this.rapier.RigidBodyDesc.kinematicPositionBased();
         break;
     }
+
+    // setting the rigid body position and rotation
+    const worldPosition = mesh.getWorldPosition(new THREE.Vector3());
+    const worldRotation = mesh.getWorldQuaternion(new THREE.Quaternion());
+    // console.log("object position", worldPosition);
+
     this.rigidBody = this.world.createRigidBody(rigidBodyType);
+    this.rigidBody.setTranslation(worldPosition, false);
+    this.rigidBody.setRotation(worldRotation, false);
 
     // defining the collider type
     let colliderType;
 
     switch (collider) {
       case "cuboid":
-        const dimensions = this.computeCuboidDimensions(mesh);
+        this.dimensions = this.computeCuboidDimensions(mesh);
         colliderType = this.rapier.ColliderDesc.cuboid(
-          dimensions.x / 2,
-          dimensions.y / 2,
-          dimensions.z / 2
+          this.dimensions.x / 2,
+          this.dimensions.y / 2,
+          this.dimensions.z / 2
         );
-        this.world.createCollider(colliderType, this.rigidBody);
+        // console.log("object physical ", mesh, this.dimensions);
+
         break;
       case "ball":
         const radius = this.computeBallDimensions(mesh);
         colliderType = this.rapier.ColliderDesc.ball(radius);
-        this.world.createCollider(colliderType, this.rigidBody);
         break;
       case "trimesh":
         const { scaledVertices, indices } = this.computeTrimeshDimensions(mesh);
@@ -74,16 +82,29 @@ export default class Physics {
           scaledVertices,
           indices
         );
-        this.world.createCollider(colliderType, this.rigidBody);
 
         break;
     }
 
-    // setting the rigid body position and rotation
-    const worldPosition = mesh.getWorldPosition(new THREE.Vector3());
-    const worldRotation = mesh.getWorldQuaternion(new THREE.Quaternion());
-    this.rigidBody.setTranslation(worldPosition);
-    this.rigidBody.setRotation(worldRotation);
+    // Creating the collider and attaching it to the rigid body
+    this.world.createCollider(colliderType, this.rigidBody);
+
+    // Optional: Adding a wireframe mesh to visualize the collider (for debugging)
+    // if (collider === "cuboid") {
+    //   const geometry = new THREE.BoxGeometry(
+    //     this.dimensions.x,
+    //     this.dimensions.y,
+    //     this.dimensions.z
+    //   );
+    //   const material = new THREE.MeshBasicMaterial({
+    //     color: 0x00ff00,
+    //     wireframe: true,
+    //   });
+    //   const wireframe = new THREE.Mesh(geometry, material);
+    //   wireframe.position.copy(worldPosition);
+    //   wireframe.quaternion.copy(worldRotation);
+    //   this.scene.add(wireframe);
+    // }
 
     this.meshMap.set(mesh, this.rigidBody);
     return this.rigidBody;
@@ -94,6 +115,7 @@ export default class Physics {
    * @param {THREE.Mesh} mesh - The mesh to compute the dimensions for
    * @returns {THREE.Vector3} The dimensions of the cuboid collider
    */
+
   computeCuboidDimensions(mesh) {
     mesh.geometry.computeBoundingBox();
     const size = mesh.geometry.boundingBox.getSize(new THREE.Vector3());
@@ -103,7 +125,7 @@ export default class Physics {
   }
 
   /**
-   * Computes the radius of a
+   * Computes the radius of a sphere
    /**
 
 Computes the radius of a sphere collider for a given mesh

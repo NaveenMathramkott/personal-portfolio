@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import App from "./App";
-import { sizeStore } from "./utils/Store";
+import { sizeStore } from "./utils/Store.js";
 
 export default class Renderer {
   constructor() {
@@ -15,13 +15,18 @@ export default class Renderer {
     this.setResizerListener();
   }
   setInstance() {
-    // initialising renderer
     this.instance = new THREE.WebGLRenderer({
       canvas: this.canvas,
       antialias: true,
     });
     this.instance.setSize(this.sizes.width, this.sizes.height);
-    this.instance.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.instance.setPixelRatio(this.sizes.pixelRatio);
+    this.instance.outputEncoding = THREE.sRGBEncoding;
+    this.instance.shadowMap.enabled = true;
+    this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    this.instance.toneMapping = THREE.ACESFilmicToneMapping;
+    this.instance.toneMappingExposure = 0.8;
   }
 
   setResizerListener() {
