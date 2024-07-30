@@ -1,8 +1,11 @@
 import * as THREE from "three";
-import App from "../App";
-import Physics from "./Physics";
-import { appStateStore } from "../utils/Store";
-import Character from "./Character";
+import App from "../App.js";
+import Physics from "./Physics.js";
+import { appStateStore } from "../utils/Store.js";
+import Character from "./Character.js";
+import Environment from "./Environment.js";
+import CharacterController from "./CharacterController.js";
+import AnimationController from "./AnimationController.js";
 
 export default class World {
   constructor() {
@@ -13,7 +16,10 @@ export default class World {
     // create world classes
     const unsub = appStateStore.subscribe((state) => {
       if (state.physicsReady && state.assetsReady) {
+        this.environment = new Environment();
         this.character = new Character();
+        this.characterController = new CharacterController();
+        this.animationController = new AnimationController();
 
         unsub();
       }
@@ -23,5 +29,8 @@ export default class World {
 
   loop(deltaTime, elapsedTime) {
     this.physics.loop();
+    if (this.environment) this.environment.loop();
+    if (this.characterController) this.characterController.loop();
+    if (this.animationController) this.animationController.loop(deltaTime);
   }
 }

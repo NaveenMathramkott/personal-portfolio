@@ -1,10 +1,11 @@
 import * as THREE from "three";
-import Camera from "./Camera";
-import Renderer from "./Renderer";
-import Loop from "./utils/Loop";
-import World from "./stage/World";
-import Resize from "./utils/Resize";
-import AssetLoader from "./utils/AssetLoader";
+import Camera from "./Camera.js";
+import Renderer from "./Renderer.js";
+import Loop from "./utils/Loop.js";
+import World from "./stage/World.js";
+import Resize from "./utils/Resize.js";
+import AssetLoader from "./utils/AssetLoader.js";
+import InputController from "./UI/InputController.js";
 
 //make an null state  for avoiding infinite loop while calling app class instance inside others like camera
 let instance = null;
@@ -21,6 +22,7 @@ export default class App {
 
     // Asset Loader
     this.assetLoader = new AssetLoader();
+    this.inputController = new InputController();
 
     //world
     this.world = new World();

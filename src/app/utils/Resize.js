@@ -1,4 +1,4 @@
-import { sizeStore } from "./Store";
+import { sizeStore } from "./Store.js";
 
 export default class Resize {
   constructor() {

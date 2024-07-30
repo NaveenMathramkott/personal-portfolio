@@ -6,6 +6,11 @@ const assetsToLoad = [
     path: "/models/avatar.gltf",
     type: "model",
   },
+  {
+    id: "environment",
+    path: "/models/office-environment.gltf",
+    type: "model",
+  },
 ];
 
 const assetStore = createStore((set) => ({

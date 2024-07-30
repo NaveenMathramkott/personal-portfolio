@@ -19,6 +19,7 @@ export default class AssetLoader {
     this.overlay = document.querySelector(".overlay");
     this.loading = document.querySelector(".loading");
     this.startButton = document.querySelector(".start");
+    this.h1 = document.querySelector("h1");
 
     // setting loading to visible
     this.loading.style.display = "block";
@@ -27,7 +28,11 @@ export default class AssetLoader {
     this.manager.onProgress = (url, itemsLoaded, itemsTotal) => {
       this.progress = (itemsLoaded / itemsTotal) * 100;
       this.progress = Math.trunc(this.progress);
-      document.getElementById("progressPercentage").innerHTML = this.progress;
+      document.getElementById(
+        "progressPercentage"
+      ).innerHTML = `${this.progress}%`;
+      this.h1.style.setProperty("--loading-width", this.progress + "%");
+
       if (this.progress === 100) {
         appStateStore.setState({ assetsReady: true });
         this.loading.classList.add("fade");

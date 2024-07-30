@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import assetStore from "../utils/AssetStore";
-import App from "../App";
+import assetStore from "../utils/AssetStore.js";
+import App from "../App.js";
 
 export default class Character {
   constructor() {
@@ -18,7 +18,7 @@ export default class Character {
     const material = new THREE.MeshStandardMaterial({
       color: 0x00ff00,
       wireframe: true,
-      visible: true,
+      visible: false,
     });
     this.instance = new THREE.Mesh(geometry, material);
     this.instance.position.set(0, 4, 0);
@@ -27,6 +27,7 @@ export default class Character {
     // add avatar to character
     const avatar = this.avatar.scene;
     avatar.rotation.y = Math.PI;
+    avatar.scale.setScalar(2);
     avatar.position.y = -1;
     this.instance.add(avatar);
   }
