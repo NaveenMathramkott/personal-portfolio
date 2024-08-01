@@ -37,9 +37,8 @@ export default class CharacterController {
     this.rigidBodyType =
       this.physics.rapier.RigidBodyDesc.kinematicPositionBased();
     this.rigidBody = this.physics.world.createRigidBody(this.rigidBodyType);
-
     // Create a cuboid collider
-    this.colliderType = this.physics.rapier.ColliderDesc.cuboid(0.3, 1, 0.3);
+    this.colliderType = this.physics.rapier.ColliderDesc.cuboid(0.38, 1, 0.6);
     this.collider = this.physics.world.createCollider(
       this.colliderType,
       this.rigidBody

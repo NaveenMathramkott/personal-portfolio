@@ -20,6 +20,9 @@ export default class AssetLoader {
     this.loading = document.querySelector(".loading");
     this.startButton = document.querySelector(".start");
     this.h1 = document.querySelector("h1");
+    this.ArrowButtons = document.querySelector(".mobileButton");
+    // this.ArrowButtons.style
+    document.getElementById("progressPercentage").style.color = "#2d7081";
 
     // setting loading to visible
     this.loading.style.display = "block";
@@ -75,10 +78,10 @@ export default class AssetLoader {
   // function for start button after progress
   ready() {
     this.loading.remove();
-
     this.startButton.style.display = "inline";
     this.startButton.classList.add("fadeIn");
 
+    console.log("auto starting");
     this.startButton.addEventListener(
       "click",
       () => {

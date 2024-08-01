@@ -3,12 +3,14 @@ import App from "../App.js";
 import ModalContentProvider from "../UI/ModalContentProvider.js";
 import assetStore from "../utils/AssetStore.js";
 import Portal from "../stage/Portal.js";
+// import VideoLoader from "../utils/VideoLoader.js";
 
 export default class Environment {
   constructor() {
     this.app = new App();
     this.scene = this.app.scene;
     this.physics = this.app.world.physics;
+    // this.videoLoader = new VideoLoader();
 
     this.assetStore = assetStore.getState();
     this.environment = this.assetStore.loadedAssets.environment;
@@ -37,7 +39,7 @@ export default class Environment {
       "dustbin",
     ];
 
-    const shadowReceivers = ["floor", "wall"];
+    const shadowReceivers = ["floor", "wall", "table"];
 
     const physicalObjects = [
       "wall",
@@ -52,6 +54,7 @@ export default class Environment {
       "table",
       "couch",
       "project-screen",
+      "monitor",
     ];
 
     for (const child of this.environmentScene.children) {
@@ -76,15 +79,11 @@ export default class Environment {
   }
 
   addLights() {
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-    this.scene.add(ambientLight);
-
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-    // this.lightOne = new THREE.DirectionalLight(0xff1012, 100);
-    // this.lightOne.position.set(0, 1, 0);
-    // this.scene.add(this.lightOne);
+    this.light = new THREE.PointLight(0xffffff, 1, 0);
 
-    this.directionalLight.position.set(1, 1, 1);
+    this.directionalLight.position.set(1, 10, 1);
     this.directionalLight.castShadow = true;
     this.directionalLight.shadow.camera.top = 30;
     this.directionalLight.shadow.camera.right = 30;
@@ -92,7 +91,18 @@ export default class Environment {
     this.directionalLight.shadow.camera.bottom = -30;
     this.directionalLight.shadow.bias = -0.002;
     this.directionalLight.shadow.normalBias = 0.072;
+
+    this.light.position.set(10, 10, 1);
+    this.light.castShadow = true;
+    this.light.position.z = 150;
+    this.light.shadow.mapSize.width = 1024;
+    this.light.shadow.mapSize.height = 1024;
+    this.light.shadow.camera.near = 1;
+    this.light.shadow.camera.far = 2000;
+
     this.scene.add(this.directionalLight);
+    this.scene.add(this.light);
+    this.scene.add(ambientLight);
   }
 
   addPortals() {
@@ -104,7 +114,6 @@ export default class Environment {
       this.environment.scene.getObjectByName("contact-screen");
     const portalMesh4 =
       this.environment.scene.getObjectByName("experience-screen");
-    console.log("contact-form", contactForm);
     const modalContentProvider = new ModalContentProvider();
 
     this.portal1 = new Portal(
@@ -121,7 +130,7 @@ export default class Environment {
     );
     this.portal4 = new Portal(
       portalMesh4,
-      modalContentProvider.getModalInfo("contactMe")
+      modalContentProvider.getModalInfo("experience")
     );
   }
 

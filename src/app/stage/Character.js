@@ -14,7 +14,7 @@ export default class Character {
 
   instantiateCharacter() {
     // create character and add to scene
-    const geometry = new THREE.BoxGeometry(0.6, 2, 0.6);
+    const geometry = new THREE.BoxGeometry(1, 4, 1);
     const material = new THREE.MeshStandardMaterial({
       color: 0x00ff00,
       wireframe: true,

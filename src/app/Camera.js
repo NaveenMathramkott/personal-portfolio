@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
 import App from "./App.js";
 import { sizeStore } from "./utils/Store.js";
+// import ThirdPersonCamera from "./utils/ThirdPersonCamera.js";
 
 export default class Camera {
   constructor() {
@@ -10,11 +11,12 @@ export default class Camera {
     this.canvas = this.app.canvas;
 
     this.sizeStore = sizeStore;
-    this.sizes = sizeStore.getState();
+    this.sizes = this.sizeStore.getState();
 
-    this.lerpValue = 0.1;
     this.initialPosition = new THREE.Vector3();
-    this.specificPosition = new THREE.Vector3(-1.3, 5, 8.1);
+    this.initialRotation = new THREE.Vector3();
+
+    this.onLookAt = false;
 
     this.setInstance();
     this.setControls();
@@ -29,6 +31,9 @@ export default class Camera {
       600
     );
     this.instance.position.z = 5;
+    // this.thirdPersonCamera = new ThirdPersonCamera({
+    //   camera: this.instance,
+    // });
   }
 
   setResizeListener() {
@@ -47,52 +52,50 @@ export default class Camera {
 
     // Enable zooming
     this.controls.enableZoom = false;
-    this.controls.zoomSpeed = 1.0;
-
-    // Enable rotation
     this.controls.enableRotate = false;
+    this.controls.zoomSpeed = 1.0;
     this.controls.rotateSpeed = 1.0;
-
-    // Optionally, set limits for zoom and rotation
-    this.controls.minDistance = 10; // Minimum zoom distance
-    // this.controls.maxDistance = 20; // Maximum zoom distance
-    // this.controls.minPolarAngle = 0; // Minimum vertical angle
-    // this.controls.maxPolarAngle = Math.PI / 2; // Maximum vertical angle (π radians is 180 degrees)
   }
 
-  setToSpecificPosition(targetMesh) {
-    this.lerpValue = 0;
-    this.initialPosition.copy(this.instance.position); // Save the current position
-    this.instance.position.copy(this.specificPosition); // Move to the specific position
+  setToSpecificPosition(position, rotation) {
+    this.onLookAt = true;
+    // this.initialPosition.copy(this.instance.position); // Save the current position
+    // this.initialPosition.copy(this.instance.rotation); // Save the current position
+    this.instance.position.copy(position); // Move to the specific position
+    this.instance.rotation.set(rotation); // Move to the specific position
+    this.instance.lookAt(position);
 
     this.isCameraToggled = true;
   }
 
   returnToInitialPosition() {
-    this.lerpValue = 0.1;
-    this.instance.position.copy(this.initialPosition); // Move back to the initial position
+    this.onLookAt = false;
+    // this.instance.position.copy(this.initialPosition); // Move back to the initial position
+    // this.instance.rotation.set(this.initialRotation); // Move back to the initial position
     this.isCameraToggled = false;
   }
 
   //loop method for animationFrame
   loop() {
     this.controls.update();
-
+    // this.thirdPersonCamera.update();
     this.characterController = this.app.world.characterController?.rigidBody;
     if (this.characterController) {
       const characterPosition = this.characterController.translation();
       const characterRotation = this.characterController.rotation();
 
-      const cameraOffset = new THREE.Vector3(0, 8, 15);
-      cameraOffset.applyQuaternion(characterRotation);
-      cameraOffset.add(characterPosition);
+      this.cameraOffset = new THREE.Vector3(0, 6, 10);
+      this.cameraOffset.applyQuaternion(characterRotation);
+      this.cameraOffset.add(characterPosition);
 
-      const targetOffset = new THREE.Vector3(0, -10, -25);
-      targetOffset.applyQuaternion(characterRotation);
-      targetOffset.add(characterPosition);
+      this.targetOffset = new THREE.Vector3(0, -10, -25);
+      this.targetOffset.applyQuaternion(characterRotation);
+      this.targetOffset.add(characterPosition);
 
-      this.instance.position.lerp(cameraOffset, this.lerpValue);
-      this.controls.target.lerp(targetOffset, this.lerpValue);
+      if (!this.onLookAt) {
+        this.instance.position.lerp(this.cameraOffset, 0.1);
+        this.controls.target.lerp(this.targetOffset, 0.1);
+      }
     }
   }
 }
