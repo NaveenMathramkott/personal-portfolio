@@ -42,7 +42,7 @@ export default class AnimationController {
 
   onInput(input) {
     if (input.forward || input.backward || input.left || input.right) {
-      this.playAnimation("run");
+      this.playAnimation("walk");
     } else {
       this.playAnimation("idle");
       this.footAudio.toggleAudio();
