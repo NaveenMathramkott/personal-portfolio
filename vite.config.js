@@ -9,7 +9,7 @@ export default defineConfig({
   publicDir: "../public/",
   plugins: [wasm(), topLevelAwait()],
   build: {
-    outDir: path.resolve(__dirname, "dist"),
+    outDir: "../dist",
     rollupOptions: {
       output: {
         manualChunks: {
@@ -18,6 +18,7 @@ export default defineConfig({
       },
     },
     chunkSizeWarningLimit: 1000, // Adjust the chunk size warning limit
+    emptyOutDir: true, // Ensure the output directory is emptied before building
   },
   resolve: {
     alias: {
