@@ -1,11 +1,4 @@
 import * as THREE from "three";
-import Camera from "./Camera.js";
-import Renderer from "./Renderer.js";
-import Loop from "./utils/Loop.js";
-import World from "./stage/World.js";
-import Resize from "./utils/Resize.js";
-import AssetLoader from "./utils/AssetLoader.js";
-import InputController from "./UI/InputController.js";
 
 //make an null state  for avoiding infinite loop while calling app class instance inside others like camera
 let instance = null;
@@ -20,18 +13,33 @@ export default class App {
     this.canvas = document.querySelector("canvas.threejs");
     this.scene = new THREE.Scene();
 
+    this.initializeModules();
+  }
+
+  async initializeModules() {
+    // Load AssetLoader and InputController dynamically
+    const { default: AssetLoader } = await import("./utils/AssetLoader.js");
+    const { default: InputController } = await import(
+      "./UI/InputController.js"
+    );
+
     // Asset Loader
     this.assetLoader = new AssetLoader();
     this.inputController = new InputController();
 
-    //world
+    // Load World dynamically
+    const { default: World } = await import("./stage/World.js");
     this.world = new World();
 
-    //camera and renderer
+    // Load Camera and Renderer dynamically
+    const { default: Camera } = await import("./Camera.js");
+    const { default: Renderer } = await import("./Renderer.js");
     this.camera = new Camera();
     this.renderer = new Renderer();
 
-    //utils
+    // Load utilities dynamically
+    const { default: Loop } = await import("./utils/Loop.js");
+    const { default: Resize } = await import("./utils/Resize.js");
     this.loop = new Loop();
     this.resize = new Resize();
   }

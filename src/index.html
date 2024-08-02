@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/amoux.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+    <title>Naveen Mathramkott</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: "Permanent Marker", cursive;
+      }
+      .loading,
+      .start,
+      .modal {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas class="threejs"> </canvas>
+    <script type="module" src="./main.js"></script>
+
+    <div class="overlay"></div>
+
+    <h1 data-text="Loading NvN Portfolio..." class="loading">
+      Loading NvN Portfolio... <span id="progressPercentage"></span>
+    </h1>
+    <button class="start">START</button>
+    <div id="css"></div>
+    <div id="myModal" class="modal">
+      <div class="modal-wrapper" id="modal-wrapper">
+        <!-- include all the form designs -->
+        <div class="modal-content">
+          <h1 id="modalTitle">Modal Title</h1>
+          <p id="modalDescription">Modal Description</p>
+
+          <!-- form section starts -->
+          <form id="contactForm">
+            <div>
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" />
+              <div class="error" id="nameError">Please enter your name.</div>
+            </div>
+            <div>
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" />
+              <div class="error" id="emailError">
+                Please enter a valid email.
+              </div>
+            </div>
+            <div>
+              <label for="message">Message:</label>
+              <textarea id="message" name="message"></textarea>
+              <div class="error" id="messageError">
+                Please enter your message.
+              </div>
+            </div>
+            <button type="submit" id="submit">Submit</button>
+          </form>
+
+          <!-- form section ends -->
+
+          <!-- Experience section -->
+          <div class="experience-section" id="experienceForm"></div>
+          <!-- experience-section ends -->
+
+          <!-- About section -->
+          <div class="about-section" id="aboutForm"></div>
+          <!-- About-section ends -->
+
+          <!-- Skill section  -->
+          <div id="skills-container"></div>
+          <!-- Skill section ends -->
+          <!-- Skill section  -->
+          <div id="project-container"></div>
+          <!-- Skill section ends -->
+        </div>
+
+        <span class="close">Close</span>
+      </div>
+    </div>
+
+    <script type="module">
+      import { CommonFunctions } from "./CommonFunction.js";
+
+      window.addEventListener("DOMContentLoaded", () => {
+        CommonFunctions.renderExperience();
+      });
+    </script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
+    ></script>
+  </body>
+</html>

@@ -1,7 +1,5 @@
 import * as THREE from "three";
-import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
-
+// Import assetStore and appStateStore directly as they are essential for state management
 import assetStore from "./AssetStore.js";
 import { appStateStore } from "./Store.js";
 
@@ -9,25 +7,24 @@ export default class AssetLoader {
   constructor() {
     this.assetStore = assetStore;
 
-    // adding loading manager
+    // Adding loading manager
     this.manager = new THREE.LoadingManager();
     this.assetStore = assetStore.getState();
     this.assetsToLoad = this.assetStore.assetsToLoad;
     this.addLoadedAsset = this.assetStore.addLoadedAsset;
 
-    // access to DOM elements
+    // Access to DOM elements
     this.overlay = document.querySelector(".overlay");
     this.loading = document.querySelector(".loading");
     this.startButton = document.querySelector(".start");
     this.h1 = document.querySelector("h1");
     this.ArrowButtons = document.querySelector(".mobileButton");
-    // this.ArrowButtons.style
     document.getElementById("progressPercentage").style.color = "#2d7081";
 
-    // setting loading to visible
+    // Setting loading to visible
     this.loading.style.display = "block";
 
-    // progress function
+    // Progress function
     this.manager.onProgress = (url, itemsLoaded, itemsTotal) => {
       this.progress = (itemsLoaded / itemsTotal) * 100;
       this.progress = Math.trunc(this.progress);
@@ -46,28 +43,37 @@ export default class AssetLoader {
       this.loading.style.display = "none";
     };
 
+    // Initialize loaders asynchronously
     this.instantiateLoaders();
+  }
+
+  async instantiateLoaders() {
+    // Dynamically import DRACOLoader and GLTFLoader
+    const { DRACOLoader } = await import("three/addons/loaders/DRACOLoader.js");
+    const { GLTFLoader } = await import("three/addons/loaders/GLTFLoader.js");
+
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath(
+      "https://www.gstatic.com/draco/versioned/decoders/1.5.5/"
+    );
+    this.gltfLoader = new GLTFLoader(this.manager);
+    this.gltfLoader.setDRACOLoader(dracoLoader);
+
+    // Load TextureLoader directly as it might be used for UI elements
+    this.textureLoader = new THREE.TextureLoader();
+
+    // Start loading assets
     this.startLoading();
   }
 
-  // gltf loader for minimal 3D package repo
-  instantiateLoaders() {
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath("/draco/");
-    this.gltfLoader = new GLTFLoader(this.manager);
-    this.gltfLoader.setDRACOLoader(dracoLoader);
-    this.textureLoader = new THREE.TextureLoader();
-  }
-
-  // loading our full glb and gltf file here to the whole project
+  // Loading GLB and GLTF files for the project
   startLoading() {
     this.assetsToLoad.forEach((asset) => {
       if (asset.type === "texture") {
         this.textureLoader.load(asset.path, (loadedAsset) => {
           this.addLoadedAsset(loadedAsset, asset.id);
         });
-      }
-      if (asset.type === "model") {
+      } else if (asset.type === "model") {
         this.gltfLoader.load(asset.path, (loadedAsset) => {
           this.addLoadedAsset(loadedAsset, asset.id);
         });
@@ -75,7 +81,7 @@ export default class AssetLoader {
     });
   }
 
-  // function for start button after progress
+  // Function for start button after progress
   ready() {
     this.loading.remove();
     this.startButton.style.display = "inline";
