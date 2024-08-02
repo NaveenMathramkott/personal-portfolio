@@ -7,4 +7,14 @@ export default defineConfig({
   root: "src/",
   publicDir: "../public/",
   plugins: [wasm(), topLevelAwait()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          three: ["three"], // Split three.js into its own chunk
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000, // Adjust the chunk size warning limit
+  },
 });
