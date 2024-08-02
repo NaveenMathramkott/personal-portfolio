@@ -1,7 +1,7 @@
 import * as THREE from "three";
 // Import assetStore and appStateStore directly as they are essential for state management
 import assetStore from "./AssetStore.js";
-import { appStateStore } from "@/app/utils/Store.js";
+import { appStateStore } from "./Store.js";
 
 export default class AssetLoader {
   constructor() {

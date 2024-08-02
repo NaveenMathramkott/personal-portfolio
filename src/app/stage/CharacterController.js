@@ -1,7 +1,7 @@
 // Import necessary modules
 import * as THREE from "three";
 import App from "../App.js";
-import { inputStore } from "@/app/utils/Store.js";
+import { inputStore } from "../utils/Store.js";
 
 /**
  * Class representing a character controller.

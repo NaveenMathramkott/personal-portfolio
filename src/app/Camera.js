@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
 import App from "./App.js";
-import { sizeStore } from "@/app/utils/Store.js";
+import { sizeStore } from "./utils/Store.js";
 // import ThirdPersonCamera from "./utils/ThirdPersonCamera.js";
 
 export default class Camera {
