@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import App from "../App.js";
-import { inputStore } from "../utils/Store.js";
+import { inputStore } from "@/app/utils/Store.js";
 import AudioLoader from "../utils/AudioLoader.js";
 
 export default class AnimationController {

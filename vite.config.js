@@ -1,6 +1,7 @@
 import wasm from "vite-plugin-wasm";
 import topLevelAwait from "vite-plugin-top-level-await";
 import { defineConfig } from "vite";
+import path from "path";
 
 export default defineConfig({
   base: "./",
@@ -16,5 +17,10 @@ export default defineConfig({
       },
     },
     chunkSizeWarningLimit: 1000, // Adjust the chunk size warning limit
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
   },
 });
