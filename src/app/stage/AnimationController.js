@@ -2,10 +2,12 @@ import * as THREE from "three";
 
 import App from "../App.js";
 import { inputStore } from "../utils/Store.js";
+import AudioLoader from "../utils/AudioLoader.js";
 
 export default class AnimationController {
   constructor() {
     this.app = new App();
+    this.footAudio = new AudioLoader();
     this.scene = this.app.scene;
     this.avatar = this.app.world.character.avatar;
 
@@ -28,6 +30,7 @@ export default class AnimationController {
   }
 
   playAnimation(name) {
+    this.footAudio.playAudio();
     if (this.currentAction === this.animations.get(name)) return;
     const action = this.animations.get(name);
     action.reset();
@@ -42,6 +45,7 @@ export default class AnimationController {
       this.playAnimation("run");
     } else {
       this.playAnimation("idle");
+      this.footAudio.toggleAudio();
     }
   }
 

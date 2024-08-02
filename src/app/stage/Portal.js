@@ -34,11 +34,15 @@ export default class Portal {
       const isNear = distance < 3;
       if (isNear) {
         if (!this.prevIsNear) {
-          this.app.camera.setToSpecificPosition(this.portalMesh);
+          this.app.camera.setToSpecificPosition(
+            this.modalInfo.position,
+            this.modalInfo.rotation
+          );
 
           this.modalManager.openModal(
             this.modalInfo.title,
-            this.modalInfo.description
+            this.modalInfo.description,
+            this.portalMesh.name
           );
           this.portalMesh.material = this.portalNearMaterial;
         }
