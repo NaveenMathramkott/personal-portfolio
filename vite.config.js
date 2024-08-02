@@ -9,7 +9,7 @@ export default defineConfig({
   publicDir: "../public/",
   plugins: [wasm(), topLevelAwait()],
   build: {
-    outDir: "../dist",
+    outDir: path.resolve(__dirname, "dist"),
     rollupOptions: {
       output: {
         manualChunks: {
