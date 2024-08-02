@@ -11,6 +11,7 @@ export default defineConfig({
   build: {
     outDir: "../dist",
     rollupOptions: {
+      treeshake: false,
       output: {
         manualChunks: {
           three: ["three"], // Split three.js into its own chunk
