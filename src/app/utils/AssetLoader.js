@@ -53,7 +53,9 @@ export default class AssetLoader {
     const { GLTFLoader } = await import("three/addons/loaders/GLTFLoader.js");
 
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath("/draco/");
+    dracoLoader.setDecoderPath(
+      "https://www.gstatic.com/draco/versioned/decoders/1.5.5/"
+    );
     this.gltfLoader = new GLTFLoader(this.manager);
     this.gltfLoader.setDRACOLoader(dracoLoader);
 
