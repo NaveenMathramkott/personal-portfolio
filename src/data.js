@@ -9,40 +9,109 @@ import mdk from "../public/projects/mdk.jpg";
 import retroGame from "../public/projects/retro-game.png";
 import spencer from "../public/projects/spencer.png";
 import truewin from "../public/projects/truewin.jpg";
+import cocotein from "../public/projects/cocotein.png";
+import helmetto from "../public/projects/helmetto.png";
+import ryvon from "../public/projects/ryvon.png";
+import spencerConfig from "../public/projects/spencer-config.png";
+import redfox from "../public/projects/redfox.png";
 
 export const experienceData = [
   {
-    title: "Co-founder at Amouxtek Solutions",
+    title: "Fullstack Developer at Amouxtek Solutions (web & Mobile)",
     duration: "Jan 2024 - Present",
     details:
-      "Leading development of innovative tech solutions and managing client projects.",
+      "Coordinating client initiatives and spearheading the creation of cutting-edge technological solutions.",
   },
   {
     title: "Web and Mobile App Developer at ZeroPixels Pvt Ltd",
     duration: "feb 2022 - Dec 2023",
-    details: "Developed complex frontend and backend solutions ",
+    details:
+      "Competent in cross-platform, JavaScript, and React Native programming, with a proven track record of turning intricate concepts into scalable, intuitive applications. competent in responsive UI/UX, state management, APIs, and performance optimization, providing flawless mobile experiences.",
   },
   {
     title: "FullStack Developer at Sysirohub Solutions",
     duration: "Oct 2019 - Jan 2022",
-    details: "Specialized in ecommerce and product design",
+    details:
+      "My expertise lies on creating scalable and high-performing solutions using databases like SQL and NoSQL, as well as frontend and backend technologies like React, Next.js, and Node.js. I've demonstrated my ability to convert wireframe designs into reliable programs that are responsive, reusable, and efficient on all platforms.",
   },
 ];
 
 export const aboutDescription = [
-  "Experienced Front End Developer with five years of expertise in building robust web and mobile applications using the React, React Ntaive, Threejs, and javascript. Proficient in Backend development with Node.js and Express.js, coupled with NoSQL and MySQL database management. Proven track record of delivering high-quality, scalable solutions while adhering to best practices and architectural patterns. Passionate about leveraging quality code to create seamless user experiences across web and mobile platforms.",
+  "Experienced Front End Developer with five years of expertise in building robust web and mobile applications. Proficient in Backend development with Node.js and Express.js, coupled with NoSQL and MySQL database management. Proven track record of delivering high-quality, scalable solutions while adhering to best practices and architectural patterns. Passionate about leveraging quality code to create seamless user experiences across web and mobile platforms.",
 ];
 
 export const projectData = [
   {
     id: 1,
+    title: "Ryvon",
+    technologies: [
+      "React Native",
+      "TailwindCSS",
+      "Zustand",
+      "PostgreSQL",
+      "Clerk",
+      "Stripe",
+    ],
+    frontImage: ryvon,
+    site: "https://github.com/NaveenMathramkott/Ryvon",
+  },
+  {
+    id: 2,
+    title: "Cocotein branding website",
+    technologies: [
+      "NextJS",
+      "React-Three-Fiber",
+      "GSAP",
+      "Prismic",
+      "TailwindCSS",
+      "Zustand",
+    ],
+    frontImage: cocotein,
+    site: "https://github.com/NaveenMathramkott/cocotein-brand",
+  },
+  {
+    id: 3,
+    title: "Helmetto E-Store",
+    technologies: [
+      "ReactJS",
+      "CSS",
+      "ThreeJS",
+      "NodeJS",
+      "ExpressJS",
+      "MongoDB",
+    ],
+    frontImage: helmetto,
+    site: "https://github.com/NaveenMathramkott/helmetto",
+  },
+  {
+    id: 4,
+    title: "Shirt Configurator",
+    technologies: [
+      "ReactJS",
+      "React-Three-Fiber",
+      "CSS",
+      "Framer-motion",
+      "Valtio",
+    ],
+    frontImage: spencerConfig,
+    site: "https://github.com/NaveenMathramkott/shirt-configurator",
+  },
+  {
+    id: 5,
+    title: "Helmet Configurator",
+    technologies: ["ReactJS", "React-Three-Fiber", "CSS"],
+    frontImage: redfox,
+    site: "https://red-fox-helmet-configurator.vercel.app/",
+  },
+  {
+    id: 6,
     title: "LillyPad CRM",
     technologies: ["React Native", "css", "Redux Toolkit", "Node", "Flipper"],
     frontImage: lillyPad,
     site: "https://play.google.com/store/apps/details?id=co.lilypad.login.crm",
   },
   {
-    id: 2,
+    id: 7,
     title: "MDK & Associates",
     technologies: ["html", "css", "javaScript", "php", "MySQL"],
 
@@ -50,7 +119,7 @@ export const projectData = [
     site: "https://mdkassociates.co.in/",
   },
   {
-    id: 3,
+    id: 8,
     title: "TrueWin Ecommerce",
     technologies: ["React JS", "Bootstrap", "Node Js", "Mongodb"],
 
@@ -58,7 +127,7 @@ export const projectData = [
     site: "https://truewinecommerce.com/",
   },
   {
-    id: 4,
+    id: 9,
     title: "Spencer Fashion Hub",
     technologies: ["Vue JS", "Bootstrap", "PHP", "Laravel"],
 
@@ -66,7 +135,7 @@ export const projectData = [
     site: "https://spencerfashionhub.com/public/",
   },
   {
-    id: 5,
+    id: 10,
     title: "Hiba Exports",
     technologies: ["html", "Bootstrap", "php", "MySQL"],
 
@@ -74,32 +143,39 @@ export const projectData = [
     site: "https://hibaexportsindia.in/",
   },
   {
-    id: 6,
+    id: 11,
     title: "Retro Game",
     technologies: ["html", "css", "JavaScript"],
 
     frontImage: retroGame,
-    site: "https://naveenmathramkott.github.io/Retro_game/",
+    site: "https://github.com/NaveenMathramkott/Retro_game",
   },
   {
-    id: 7,
+    id: 12,
     title: "Chat Gram",
-    technologies: ["React JS", "chakra UI", "Node JS", "Express JS", "MongoDB"],
+    technologies: [
+      "React JS",
+      "chakra UI",
+      "Node JS",
+      "Express JS",
+      "MongoDB",
+      "SocketIO",
+    ],
 
     frontImage: chatApp,
-    site: "https://chat-gram-phi.vercel.app/",
+    site: "https://github.com/NaveenMathramkott/Chat_Gram",
   },
   {
-    id: 8,
+    id: 13,
     title: "Ecommerce web app",
     technologies: ["React JS", "CSS3", "Node JS", "Express JS", "MongoDB"],
 
     frontImage: ecommerce,
-    site: "https://emartecom.vercel.app/",
+    site: "https://github.com/NaveenMathramkott/MERN_Ecommecre",
   },
   {
-    id: 9,
-    title: "Figma Clone",
+    id: 14,
+    title: "Collabrative design Tool",
     technologies: [
       "Next JS",
       "TypeScript",
@@ -110,17 +186,17 @@ export const projectData = [
     ],
 
     frontImage: figma,
-    site: "https://figma-clone-nextjs.vercel.app/",
+    site: "https://github.com/NaveenMathramkott/figma-clone-nextjs",
   },
   {
-    id: 10,
+    id: 15,
     title: "Deliveroo Clone",
     technologies: ["React Native", "CSS3", "Sanity IO"],
     frontImage: deliveroo,
     site: "https://github.com/NaveenMathramkott/deliveroo-clone",
   },
   {
-    id: 11,
+    id: 16,
     title: "Discord Clone",
     technologies: ["Next JS", "CSS3", "GUN JS", "Sanity IO"],
     frontImage: discord,

@@ -6,6 +6,7 @@
   --font-secondary: "Poppins", sans-serif;
   --white: #ffffff;
   --loader: #2d7081;
+  --primary: #232b72;
 }
 
 body {
@@ -143,14 +144,14 @@ h1::before {
 }
 
 .modal-content {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
   font-family: var(--font-secondary);
   margin: 0 auto;
-  color: var(--white);
+  color: var(--primary);
 }
 
 .close {
@@ -238,7 +239,7 @@ button {
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  color: var(--white);
+  color: var(--primary);
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
@@ -304,12 +305,12 @@ button {
 
 .experience-card h2 {
   margin: 0;
-  color: var(--white);
+  color: var(--primary);
 }
 
 .experience-card p {
   margin: 5px 0;
-  color: var(--white);
+  color: var(--primary);
 }
 
 .experience-details {
@@ -374,7 +375,7 @@ button {
 
 .project {
   background-color: rgba(255, 255, 255, 0.3);
-  color: #fff;
+  color: var(--primary);
   padding: 10px;
   border-radius: 4px;
   text-align: center;

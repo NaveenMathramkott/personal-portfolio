@@ -45,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
   techStack.forEach((skill) => {
     const skillElement = document.createElement("div");
     skillElement.className = "skill";
+    skillElement.style.alignItems = "center";
+    skillElement.style.justifyItems = "center";
 
     const skillImage = document.createElement("img");
     skillImage.src = skill.name;

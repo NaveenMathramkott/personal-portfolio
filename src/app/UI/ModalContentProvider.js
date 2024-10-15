@@ -16,12 +16,12 @@ export default class ModalContentProvider {
       },
       experience: {
         title: "Experience",
-        description: "get me mail through NaveenMathramkott",
+        description: "",
         position: new THREE.Vector3(6.5, 7, -17),
       },
       contactMe: {
-        title: "Contact",
-        description: "get me mail through NaveenMathramkott",
+        title: "Contact Me",
+        description: "Drop me an email",
         position: new THREE.Vector3(0, 5, 10),
 
         // rotation: new THREE.Vector3(0, 0, 0),

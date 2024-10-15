@@ -48,7 +48,7 @@ export const techStack = [
   },
   {
     name: adobe,
-    tag: "Adobe Illustrator",
+    tag: "Illustrator",
   },
   {
     name: blender,

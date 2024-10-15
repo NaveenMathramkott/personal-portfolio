@@ -11,7 +11,6 @@ export default class ModalManager {
   }
 
   openModal(title, desc, modalName) {
-    console.log("portalMesh", modalName);
     document.getElementById("modalTitle").innerHTML = title;
     this.description = document.getElementById("modalDescription");
 
@@ -20,6 +19,8 @@ export default class ModalManager {
     this.modal.style.display = "block";
     this.modal.classList.remove("fadeOut");
     this.modal.classList.add("fadeIn");
+    this.modal.style.zIndex = "1050";
+    this.close.style.zIndex = "1050";
 
     this.experienceForm = document.getElementById("experienceForm");
     this.contactForm = document.getElementById("contactForm");
@@ -36,6 +37,7 @@ export default class ModalManager {
     if (modalName === "contact-screen") {
       new FormValidation(this.contactForm);
       this.contactForm.style.display = "block";
+      this.description.style.display = "block";
     }
     //---------------------------------------------------->
 
@@ -43,7 +45,7 @@ export default class ModalManager {
     //---------------------------------------------------->
 
     if (modalName === "experience-screen") {
-      this.experienceForm.style.display = "block";
+      this.experienceForm.style.display = "flex";
     }
 
     //----------------------------------------------------->
@@ -62,6 +64,8 @@ export default class ModalManager {
     if (modalName === "about-screen") {
       this.description.style.display = "block";
       this.skillsContainer.style.display = "flex";
+      this.skillsContainer.style.alignItems = "center";
+      this.skillsContainer.style.justifyItems = "center";
     }
     //----------------------------------------------------->
   }
