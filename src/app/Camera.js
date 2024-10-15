@@ -25,7 +25,7 @@ export default class Camera {
   setInstance() {
     // initialising perspective camera
     this.instance = new THREE.PerspectiveCamera(
-      35,
+      55,
       this.sizes.width / this.sizes.height,
       0.1,
       600
@@ -57,13 +57,13 @@ export default class Camera {
     this.controls.rotateSpeed = 1.0;
   }
 
-  setToSpecificPosition(position, rotation) {
+  setToSpecificPosition(mesh) {
     this.onLookAt = true;
     // this.initialPosition.copy(this.instance.position); // Save the current position
     // this.initialPosition.copy(this.instance.rotation); // Save the current position
-    this.instance.position.copy(position); // Move to the specific position
-    this.instance.rotation.set(rotation); // Move to the specific position
-    this.instance.lookAt(position);
+    this.instance.position.copy(mesh.position); // Move to the specific position
+    this.instance.rotation.set(mesh.rotation); // Move to the specific position
+    this.instance.lookAt(mesh);
 
     this.isCameraToggled = true;
   }

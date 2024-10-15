@@ -34,10 +34,7 @@ export default class Portal {
       const isNear = distance < 3;
       if (isNear) {
         if (!this.prevIsNear) {
-          this.app.camera.setToSpecificPosition(
-            this.modalInfo.position,
-            this.modalInfo.rotation
-          );
+          this.app.camera.setToSpecificPosition(this.modalInfo);
 
           this.modalManager.openModal(
             this.modalInfo.title,
